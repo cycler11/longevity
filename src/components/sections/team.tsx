@@ -3,11 +3,11 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import { Github, Linkedin, Mail } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { CONTACT_EMAIL } from "@/lib/constants";
 import { useState } from "react";
 import { TeamMember, AdvisorConsultant } from "@/types/team";
-import { SafeImage } from "@/components/ui/safe-image";
 
 const team: TeamMember[] = [
   {
@@ -158,14 +158,20 @@ export function TeamSection() {
             >
               <Card className="glass overflow-hidden">
                 <CardContent className="p-3 md:p-6">
-                  <div className="aspect-square mb-3 md:mb-4 overflow-hidden rounded-full w-[120px] md:w-[160px] mx-auto">
-                    <SafeImage
+                  <div className="aspect-square mb-3 md:mb-4 overflow-hidden rounded-full w-[120px] md:w-[160px] mx-auto relative">
+                    <Image
                       src={member.image}
                       alt={member.name}
                       width={160}
                       height={160}
                       className="w-full h-full object-cover"
-                      fallback="/events/default.png"
+                      unoptimized
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        if (!target.src.includes('default.png')) {
+                          target.src = "/events/default.png";
+                        }
+                      }}
                     />
                   </div>
                   <h3 className="text-lg md:text-xl font-bold">{member.name}</h3>
@@ -225,13 +231,18 @@ export function TeamSection() {
               <CardContent className="p-3 md:p-6 flex flex-col md:flex-row gap-4 items-start">
                 <div className="flex-shrink-0">
                   <div className="aspect-square mb-3 md:mb-0 overflow-hidden rounded-full w-[100px] md:w-[120px] mx-auto">
-                    <SafeImage
+                    <Image
                       src={advisor.image}
                       alt={advisor.name}
                       width={120}
                       height={120}
                       className="w-full h-full object-cover"
-                      fallback="/events/default.png"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        if (target.src !== `${window.location.origin}/events/default.png`) {
+                          target.src = "/events/default.png";
+                        }
+                      }}
                     />
                   </div>
                 </div>
@@ -291,13 +302,18 @@ export function TeamSection() {
               <CardContent className="p-3 md:p-6 flex flex-col md:flex-row gap-4 items-start">
                 <div className="flex-shrink-0">
                   <div className="aspect-square mb-3 md:mb-0 overflow-hidden rounded-full w-[100px] md:w-[120px] mx-auto">
-                    <SafeImage
+                    <Image
                       src={consultant.image}
                       alt={consultant.name}
                       width={120}
                       height={120}
                       className="w-full h-full object-cover"
-                      fallback="/events/default.png"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        if (target.src !== `${window.location.origin}/events/default.png`) {
+                          target.src = "/events/default.png";
+                        }
+                      }}
                     />
                   </div>
                 </div>

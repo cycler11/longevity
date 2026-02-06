@@ -34,24 +34,15 @@ export function SafeImage({
     setHasError(false);
   }, [src]);
 
-  // For Next.js Image, we need to handle errors differently
-  // We'll use a wrapper approach with native img for error handling
-  if (hasError || imgSrc === fallback) {
-    // Use native img for fallback to ensure it works
+  // If we already have an error, use native img for fallback
+  if (hasError) {
     if (fill) {
       return (
         <div className={className} style={{ position: 'relative', width: '100%', height: '100%' }}>
           <img
             src={fallback}
             alt={alt}
-            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-            onError={(e) => {
-              // Ultimate fallback - use a data URI placeholder
-              const target = e.target as HTMLImageElement;
-              if (!target.src.startsWith('data:')) {
-                target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMzMzIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxOCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkltYWdlIG5vdCBmb3VuZDwvdGV4dD48L3N2Zz4=';
-              }
-            }}
+            style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'inherit' }}
           />
         </div>
       );
@@ -63,16 +54,11 @@ export function SafeImage({
         width={width}
         height={height}
         className={className}
-        onError={(e) => {
-          const target = e.target as HTMLImageElement;
-          if (!target.src.startsWith('data:')) {
-            target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMzMzIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxOCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkltYWdlIG5vdCBmb3VuZDwvdGV4dD48L3N2Zz4=';
-          }
-        }}
       />
     );
   }
 
+  // Use Next.js Image with error handling
   if (fill) {
     return (
       <Image
@@ -85,7 +71,12 @@ export function SafeImage({
         onError={() => {
           if (!hasError) {
             setHasError(true);
-            setImgSrc(fallback);
+          }
+        }}
+        onLoadingComplete={(result) => {
+          // Check if image actually loaded
+          if (result.naturalWidth === 0) {
+            setHasError(true);
           }
         }}
       />
@@ -104,7 +95,12 @@ export function SafeImage({
       onError={() => {
         if (!hasError) {
           setHasError(true);
-          setImgSrc(fallback);
+        }
+      }}
+      onLoadingComplete={(result) => {
+        // Check if image actually loaded
+        if (result.naturalWidth === 0) {
+          setHasError(true);
         }
       }}
     />
