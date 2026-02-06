@@ -1849,9 +1849,6 @@ video {
 .border-\[hsl\(var\(--orange-bright\)\)\/0\.2\] {
   border-color: hsl(var(--orange-bright))/0.2;
 }
-.border-\[hsl\(var\(--orange-bright\)\)\] {
-  border-color: hsl(var(--orange-bright));
-}
 .border-border {
   border-color: hsl(var(--border));
 }
@@ -3231,10 +3228,6 @@ video {
 
 .hover\:border-white\/20:hover {
   border-color: rgb(255 255 255 / 0.2);
-}
-
-.hover\:bg-\[hsl\(var\(--orange-bright\)\)\]:hover {
-  background-color: hsl(var(--orange-bright));
 }
 
 .hover\:bg-\[hsl\(var\(--orange-vivid\)\)\]:hover {
