@@ -5,8 +5,6 @@ import Image from "next/image";
 
 export const SkeletonTwo = () => {
   const images = [
-    "/feature-2/richard diaz.jpg",
-    // "/feature-2/ralph.jpg",
     "/feature-2/2025-05-20 20.54.26.jpg",
     "/feature-2/Caltech Longevity Hackathon.avif",
   ];
