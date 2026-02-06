@@ -2,10 +2,10 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 import { Instagram, ExternalLink, X } from 'lucide-react';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import { SafeImage } from '@/components/ui/safe-image';
 
 interface InstagramPost {
   id: string;
@@ -23,7 +23,7 @@ interface InstagramGalleryProps {
 
 // Mock data for demonstration - replace with real API call
 const mockPosts: InstagramPost[] = [
-  // Newly added PNG images - displayed first
+  // Only IMG files uploaded today
   {
     id: '1',
     media_url: '/events/IMG_3149-Recovered.png',
@@ -78,42 +78,6 @@ const mockPosts: InstagramPost[] = [
     media_url: '/events/IMG_8435.png',
     permalink: 'https://www.instagram.com/caltechlongevity/',
     caption: 'Event Photo',
-    media_type: 'IMAGE',
-  },
-  // Other existing images
-  {
-    id: '9',
-    media_url: '/feature-2/Caltech Longevity Hackathon.avif',
-    permalink: 'https://www.instagram.com/caltechlongevity/',
-    caption: 'Caltech Longevity Hackathon 2025',
-    media_type: 'IMAGE',
-  },
-  {
-    id: '9',
-    media_url: '/feature-2/2025-05-20 20.54.26.jpg',
-    permalink: 'https://www.instagram.com/caltechlongevity/',
-    caption: 'Community Event',
-    media_type: 'IMAGE',
-  },
-  {
-    id: '10',
-    media_url: '/events/Caltech Longevity Club Meeting.avif',
-    permalink: 'https://www.instagram.com/caltechlongevity/',
-    caption: 'Club Meeting',
-    media_type: 'IMAGE',
-  },
-  {
-    id: '11',
-    media_url: '/events/Caltech Longevity Hackathon.avif',
-    permalink: 'https://www.instagram.com/caltechlongevity/',
-    caption: 'Hackathon Highlights',
-    media_type: 'IMAGE',
-  },
-  {
-    id: '22',
-    media_url: '/events/career fair.jpg',
-    permalink: 'https://www.instagram.com/caltechlongevity/',
-    caption: 'Career Fair',
     media_type: 'IMAGE',
   },
 ];
@@ -230,13 +194,12 @@ export function InstagramGallery({ posts, username = 'caltechlongevity' }: Insta
                   className="relative group cursor-pointer aspect-square overflow-hidden rounded-lg"
                   onClick={() => setSelectedPost(post)}
                 >
-                  <SafeImage
+                  <Image
                     src={post.media_url}
                     alt={post.caption || 'Instagram post'}
                     fill
                     className="object-cover transition-transform duration-300 group-hover:scale-110"
                     sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                    fallback="/events/default.png"
                   />
                   
                   {/* Overlay */}
@@ -271,13 +234,12 @@ export function InstagramGallery({ posts, username = 'caltechlongevity' }: Insta
               
               <div className="flex flex-col md:flex-row">
                 <div className="relative w-full md:w-2/3 aspect-square md:aspect-auto md:h-[600px]">
-                  <SafeImage
+                  <Image
                     src={selectedPost.media_url}
                     alt={selectedPost.caption || 'Instagram post'}
                     fill
                     className="object-cover"
                     sizes="(max-width: 768px) 100vw, 66vw"
-                    fallback="/events/default.png"
                   />
                 </div>
                 
