@@ -41,7 +41,10 @@ export function WhoWeAreSection() {
                 <p className="text-muted-foreground">
                   Passionate about longevity science and ready to make an impact in the field
                 </p>
-                <Button className="mt-4" asChild>
+                <Button 
+                  className="mt-4 rounded-full w-full sm:w-auto" 
+                  asChild
+                >
                   <Link href={URLS.NOTION_SIGNUP} target="_blank" rel="noopener noreferrer">
                     Join as a Student
                   </Link>

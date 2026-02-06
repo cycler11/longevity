@@ -1,4 +1,6 @@
-import Image from "next/image";
+"use client";
+
+import { SafeImage } from "@/components/ui/safe-image";
 
 export function HeroPreload() {
   return (
@@ -35,12 +37,13 @@ export function HeroPreload() {
                 { src: "/sponsors/vitadao.jpg", alt: "VitaDAO" },
               ].map((logo) => (
                 <div key={logo.alt} className="w-24 h-8 relative opacity-50">
-                  <Image
+                  <SafeImage
                     src={logo.src}
                     alt={logo.alt}
                     width={120}
                     height={40}
                     className="object-contain"
+                    fallback="/sponsors/caltech.png"
                   />
                 </div>
               ))}

@@ -21,4 +21,5 @@ export interface Event {
   featured?: boolean;
   isPast?: boolean;
   photo?: string;
+  description?: string;
 }

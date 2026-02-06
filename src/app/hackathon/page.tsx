@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
+import { SafeImage } from "@/components/ui/safe-image";
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -120,12 +120,13 @@ export default function HackathonPage() {
                   <div className="space-y-4">
                     <div className="relative w-full overflow-hidden rounded-xl border border-white/10 bg-black/10">
                       <div className="relative aspect-[16/9]">
-                        <Image
+                        <SafeImage
                           src="/events/Caltech%20Longevity%20Hackathon.avif"
                           alt="Caltech Longevity Innovation Hackathon"
                           fill
                           className="object-cover"
                           priority
+                          fallback="/events/default.png"
                         />
                       </div>
                     </div>

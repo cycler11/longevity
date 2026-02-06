@@ -11,29 +11,31 @@ import {
   Github,
   ExternalLink
 } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { WavyBackground } from "../ui/wavy-background";
 import type { Event } from "@/types/events";
 import { getEvents } from "@/data/events";
+import { SafeImage } from "@/components/ui/safe-image";
 
 const DEFAULT_SPEAKER_IMAGE = "/events/default.png";
 
 function EventCard({ event }: { event: Event }) {
   const router = useRouter();
   const isHackaton = event.id === "hackaton-2026";
+  const isMeditation = event.id === "meditation-event";
 
   return (
     <Card
       className={
         "glass overflow-hidden" +
-        (isHackaton
+        ((isHackaton || isMeditation)
           ? " cursor-pointer transition-colors hover:border-white/20"
           : "")
       }
       onClick={() => {
         if (isHackaton) router.push("/hackathon");
+        if (isMeditation) router.push("/meditation");
       }}
     >
       <CardContent className="p-3 sm:p-6">
@@ -42,7 +44,7 @@ function EventCard({ event }: { event: Event }) {
           {/* IMAGE */}
           <div className="w-12 h-12 sm:w-full sm:h-auto sm:max-w-[200px] flex-shrink-0">
             <div className="aspect-square rounded-lg overflow-hidden">
-              <Image
+              <SafeImage
                 src={
                   event.id === "club-fair"
                     ? "/events/career%20fair.jpg"
@@ -53,6 +55,7 @@ function EventCard({ event }: { event: Event }) {
                 height={300}
                 className="object-cover w-full h-full"
                 priority
+                fallback={DEFAULT_SPEAKER_IMAGE}
               />
             </div>
           </div>

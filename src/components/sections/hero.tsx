@@ -2,7 +2,6 @@
 
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import Image from "next/image";
 import { LogoCarousel } from "@/components/ui/logo-carousel";
 import { SocialProof } from "@/components/ui/social-proof";
 import { DeadlineTimer } from "@/components/ui/deadline-timer";
@@ -12,17 +11,19 @@ import { useRouter } from 'next/navigation';
 import { getEvents } from "@/data/events";
 import { HeroPill } from "@/components/ui/hero-pill";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { SafeImage } from "@/components/ui/safe-image";
 
-// Single reusable logo component
+// Single reusable logo component with fallback
 function SponsorLogo({ src, alt, className }: { src: string; alt: string; className?: string }) {
   return (
     <div className={className}>
-      <Image
+      <SafeImage
         src={src}
         alt={alt}
         width={120}
         height={40}
         className="w-full h-full object-contain"
+        fallback="/sponsors/caltech.png"
       />
     </div>
   );

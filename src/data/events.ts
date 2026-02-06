@@ -3,18 +3,19 @@ import type { Event } from "@/types/events";
 export const events: Event[] = [
   {
     id: "meditation-event",
-    topic: "Meditation & Mindfulness Event",
+    topic: "Longevity Meditation",
     date: null, // TBA
     time: "TBA",
-    location: "TBA",
+    location: "Pasadena, California",
     featured: false,
     speakers: [{
       name: "Caltech Longevity Club",
       title: "Organizers",
       social: { twitter: "https://x.com/caltechlongevity" },
-      photo: "/events/default.png" // TODO: Replace with image from Luma
+      photo: "/events/longevity-meditation.jpg"
     }],
-    url: "https://luma.com/iz5nfed1"
+    url: "https://luma.com/iz5nfed1",
+    description: "Join the Caltech Longevity Club for a high impact meditation experience designed to sharpen the mind, regulate the nervous system, and support long term brain and body health. This is not a passive wellness session. It is a science informed longevity practice bringing together neuroscience, stress physiology, and intentional focus to help you reset, recover, and perform at a higher level."
   },
 
   {

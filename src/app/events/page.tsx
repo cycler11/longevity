@@ -4,13 +4,13 @@ import React, { useState } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import { Calendar, MapPin, Linkedin, X, GithubIcon, Filter } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { WavyBackground } from "@/components/ui/wavy-background";
 import { getEvents } from "@/data/events";
 import { Event } from "@/types/events";
 import { Button } from "@/components/ui/button";
+import { SafeImage } from "@/components/ui/safe-image";
 
 const DEFAULT_SPEAKER_IMAGE = "/events/default.png";
 
@@ -19,17 +19,19 @@ function EventCard({ event, variant = 'default' }: { event: Event; variant?: 'fe
   const isPast = event.isPast || (event.date && new Date(event.date) < new Date());
   const isFeatured = variant === 'featured';
   const isHackaton = event.id === "hackaton-2026";
+  const isMeditation = event.id === "meditation-event";
 
   return (
     <Card
       className={
         "glass overflow-hidden" +
-        (isHackaton
+        ((isHackaton || isMeditation)
           ? " cursor-pointer transition-colors hover:border-white/20"
           : "")
       }
       onClick={() => {
         if (isHackaton) router.push("/hackathon");
+        if (isMeditation) router.push("/meditation");
       }}
     >
       <CardContent className="p-6">
@@ -37,13 +39,14 @@ function EventCard({ event, variant = 'default' }: { event: Event; variant?: 'fe
           {/* Image Section - Left side, proper size */}
           <div className="w-full md:w-1/3 flex-shrink-0">
             <div className="aspect-square rounded-lg overflow-hidden bg-black/10">
-              <Image
+              <SafeImage
                 src={event.id === "club-fair" ? "/events/career%20fair.jpg" : (event.speakers[0]?.photo || DEFAULT_SPEAKER_IMAGE)}
                 alt={event.speakers[0]?.name || event.topic}
                 width={400}
                 height={400}
                 className="object-cover w-full h-full"
                 priority={isFeatured}
+                fallback={DEFAULT_SPEAKER_IMAGE}
               />
             </div>
           </div>

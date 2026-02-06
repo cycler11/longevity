@@ -2,10 +2,10 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import Image from 'next/image';
 import { Instagram, ExternalLink, X } from 'lucide-react';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
+import { SafeImage } from '@/components/ui/safe-image';
 
 interface InstagramPost {
   id: string;
@@ -293,12 +293,13 @@ export function InstagramGallery({ posts, username = 'caltechlongevity' }: Insta
                   className="relative group cursor-pointer aspect-square overflow-hidden rounded-lg"
                   onClick={() => setSelectedPost(post)}
                 >
-                  <Image
+                  <SafeImage
                     src={post.media_url}
                     alt={post.caption || 'Instagram post'}
                     fill
                     className="object-cover transition-transform duration-300 group-hover:scale-110"
                     sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                    fallback="/events/default.png"
                   />
                   
                   {/* Overlay */}
@@ -333,12 +334,13 @@ export function InstagramGallery({ posts, username = 'caltechlongevity' }: Insta
               
               <div className="flex flex-col md:flex-row">
                 <div className="relative w-full md:w-2/3 aspect-square md:aspect-auto md:h-[600px]">
-                  <Image
+                  <SafeImage
                     src={selectedPost.media_url}
                     alt={selectedPost.caption || 'Instagram post'}
                     fill
                     className="object-cover"
                     sizes="(max-width: 768px) 100vw, 66vw"
+                    fallback="/events/default.png"
                   />
                 </div>
                 
