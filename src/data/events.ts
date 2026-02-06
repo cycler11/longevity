@@ -2,6 +2,22 @@ import type { Event } from "@/types/events";
 
 export const events: Event[] = [
   {
+    id: "meditation-event",
+    topic: "Meditation & Mindfulness Event",
+    date: null, // TBA
+    time: "TBA",
+    location: "TBA",
+    featured: false,
+    speakers: [{
+      name: "Caltech Longevity Club",
+      title: "Organizers",
+      social: { twitter: "https://x.com/caltechlongevity" },
+      photo: "/events/default.png" // TODO: Replace with image from Luma
+    }],
+    url: "https://luma.com/iz5nfed1"
+  },
+
+  {
     id: "hackaton-2026",
     topic: "Caltech Longevity Innovation Hackathon",
     date: "2026-05-23",
@@ -134,8 +150,18 @@ export function getEvents() {
   return {
     featured: events.filter(event => event.featured),
     upcoming: events
-      .filter(event => event.date && !event.isPast && new Date(event.date) >= now)
-      .sort((a, b) => new Date(a.date!).getTime() - new Date(b.date!).getTime()),
+      .filter(event => {
+        if (event.isPast) return false;
+        // Include events without date (TBA) or events with future dates
+        if (!event.date) return true;
+        return new Date(event.date) >= now;
+      })
+      .sort((a, b) => {
+        // Events without date go to the end
+        if (!a.date) return 1;
+        if (!b.date) return -1;
+        return new Date(a.date).getTime() - new Date(b.date).getTime();
+      }),
     past: events
       .filter(event => event.date && (event.isPast || new Date(event.date) < now))
       .sort((a, b) => new Date(b.date!).getTime() - new Date(a.date!).getTime())

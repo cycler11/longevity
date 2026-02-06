@@ -21,6 +21,7 @@ import {
 } from "lucide-react";
 
 import { events } from "@/data/events";
+import { SponsorshipTiers } from "@/components/sections/sponsorship-tiers";
 
 export const metadata: Metadata = {
   title: "Hackathon 2026 | Caltech Longevity Club",
@@ -281,6 +282,9 @@ export default function HackathonPage() {
           </div>
         </WavyBackground>
       </section>
+
+      {/* Sponsorship Tiers Section */}
+      <SponsorshipTiers />
     </main>
   );
 }

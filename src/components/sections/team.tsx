@@ -30,7 +30,7 @@ const team: TeamMember[] = [
 
   {
     name: "Duo Tao",
-    role: "Secretary",
+    role: "Treasurer",
     image: "/team/duo-tao.webp",
     links: {
       linkedin: "https://www.linkedin.com/in/duotao",
@@ -38,12 +38,24 @@ const team: TeamMember[] = [
   },
 
   {
-    name: "Emily Gu",
-    role: "Treasurer",
-    image: "/team/emily-gu-ai.webp",
-    links: {
-      github: "https://github.com/emily5-1-2",
-    },
+    name: "Mahi Ravi",
+    role: "Team Member",
+    image: "/team/mahi-ravi.webp",
+    links: {},
+  },
+
+  {
+    name: "JP",
+    role: "Team Member",
+    image: "/team/jp.webp",
+    links: {},
+  },
+
+  {
+    name: "Ayush",
+    role: "Team Member",
+    image: "/team/ayush.webp",
+    links: {},
   },
 ];
 
@@ -153,6 +165,11 @@ export function TeamSection() {
                       width={160}
                       height={160}
                       className="w-full h-full object-cover"
+                      onError={(e) => {
+                        // Fallback to default image if member image doesn't exist
+                        const target = e.target as HTMLImageElement;
+                        target.src = "/events/default.png";
+                      }}
                     />
                   </div>
                   <h3 className="text-lg md:text-xl font-bold">{member.name}</h3>

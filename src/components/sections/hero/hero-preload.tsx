@@ -29,8 +29,9 @@ export function HeroPreload() {
             <div className="flex justify-center items-center gap-4 w-full">
               {[
                 { src: "/sponsors/caltech.png", alt: "Caltech" },
-                { src: "/sponsors/brogevity.png", alt: "Brogevity" },
-                { src: "/sponsors/blueprint.png", alt: "Blueprint" },
+                { src: "/sponsors/xyz-vc.png", alt: "XYZ VC" },
+                { src: "/sponsors/glycanage.png", alt: "GlycanAge" },
+                { src: "/sponsors/aetas.png", alt: "Aetas" },
                 { src: "/sponsors/vitadao.jpg", alt: "VitaDAO" },
               ].map((logo) => (
                 <div key={logo.alt} className="w-24 h-8 relative opacity-50">

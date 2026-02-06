@@ -30,9 +30,10 @@ function SponsorLogo({ src, alt, className }: { src: string; alt: string; classN
 
 // Logo configuration for the carousel
 const sponsorLogos = [
-  { name: "Brogevity", src: "/sponsors/brogevity.png" },
   { name: "Caltech", src: "/sponsors/caltech.png" },
-  { name: "Insilico", src: "/sponsors/insilico.png" },
+  { name: "XYZ VC", src: "/sponsors/xyz-vc.png" },
+  { name: "GlycanAge", src: "/sponsors/glycanage.png" },
+  { name: "Aetas", src: "/sponsors/aetas.png" },
   { name: "LongevC", src: "/sponsors/longevc.svg" },
   { name: "Longevity Pledge", src: "/sponsors/logo-white_Longevity.svg" },
   { name: "Retro", src: "/sponsors/retrobio.png.webp" },

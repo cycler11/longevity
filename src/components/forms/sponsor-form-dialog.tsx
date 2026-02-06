@@ -9,7 +9,10 @@ export function SponsorFormDialog() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline" className="mt-4">
+        <Button 
+          variant="outline" 
+          className="w-full rounded-full border-[hsl(var(--orange-bright))] hover:bg-[hsl(var(--orange-bright))] hover:text-white transition-all"
+        >
           Become a Sponsor
         </Button>
       </DialogTrigger>
