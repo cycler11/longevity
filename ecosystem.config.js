@@ -3,14 +3,14 @@ module.exports = {
     {
       name: 'longevity-club',
       script: 'npm',
-      args: 'run dev',
+      args: 'run start',
       cwd: '/Users/cyclerss/Downloads/CLC-0502',
       instances: 1,
       autorestart: true,
       watch: false,
       max_memory_restart: '1G',
       env: {
-        NODE_ENV: 'development',
+        NODE_ENV: 'production',
         PORT: 3000
       },
       error_file: './logs/pm2-error.log',
