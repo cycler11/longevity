@@ -55,23 +55,47 @@ export function NavBar({ items, className }: NavBarProps) {
         {items.map((item) => {
           const Icon = item.icon
           const isActive = activeTab === item.name
- 
+          const isExternal = item.url.startsWith("http://") || item.url.startsWith("https://") || item.url.startsWith("mailto:")
+          const linkClassName = cn(
+            "relative cursor-pointer text-sm font-semibold px-3 md:px-6 py-2 rounded-full transition-all duration-300",
+            "text-foreground/80 hover:text-primary bg-background flex items-center gap-2",
+            isActive && "bg-muted text-primary",
+            item.disabled && "opacity-50 cursor-not-allowed hover:text-foreground/80",
+            item.isCTA && "gradient-button text-white hover:text-white"
+          )
+
+          if (item.disabled) {
+            return (
+              <span key={item.name} className={linkClassName}>
+                <Icon size={18} strokeWidth={2} />
+                {!isMobile && <span>{item.name}</span>}
+                {isMobile && item.isCTA && <span>{item.name}</span>}
+              </span>
+            )
+          }
+
+          if (isExternal) {
+            return (
+              <a
+                key={item.name}
+                href={item.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={linkClassName}
+              >
+                <Icon size={18} strokeWidth={2} />
+                {!isMobile && <span>{item.name}</span>}
+                {isMobile && item.isCTA && <span>{item.name}</span>}
+              </a>
+            )
+          }
+
           return (
             <Link
               key={item.name}
               href={item.url}
-              onClick={(e) => {
-                if (item.disabled) {
-                  e.preventDefault();
-                }
-              }}
-              className={cn(
-                "relative cursor-pointer text-sm font-semibold px-3 md:px-6 py-2 rounded-full transition-all duration-300",
-                "text-foreground/80 hover:text-primary bg-background flex items-center gap-2",
-                isActive && "bg-muted text-primary",
-                item.disabled && "opacity-50 cursor-not-allowed hover:text-foreground/80",
-                item.isCTA && "gradient-button text-white hover:text-white"
-              )}
+              scroll={true}
+              className={linkClassName}
             >
               <Icon size={18} strokeWidth={2} />
               {!isMobile && (

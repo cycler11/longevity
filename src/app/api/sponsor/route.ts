@@ -1,7 +1,11 @@
 import { Resend } from 'resend';
 import { NextResponse } from 'next/server';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+function getResend() {
+  const key = process.env.RESEND_API_KEY;
+  if (!key) return null;
+  return new Resend(key);
+}
 
 // Get emails from env and split into array
 const notificationEmails = process.env.NOTIFICATION_EMAILS?.split(',') || [];
@@ -28,7 +32,13 @@ export async function POST(req: Request) {
       );
     }
 
-    // Check if notification emails are configured
+    const resend = getResend();
+    if (!resend) {
+      return NextResponse.json(
+        { error: 'Email service not configured' },
+        { status: 500 }
+      );
+    }
     if (notificationEmails.length === 0) {
       console.error('NOTIFICATION_EMAILS environment variable is not set');
       return NextResponse.json(

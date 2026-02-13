@@ -54,7 +54,7 @@ const team: TeamMember[] = [
   {
     name: "Ayush",
     role: "Team Member",
-    image: "/team/ayush.webp",
+    image: "/team/ayush.jpg?v=1",
     links: {},
   },
 ];
@@ -159,16 +159,16 @@ export function TeamSection() {
               <Card className="glass overflow-hidden">
                 <CardContent className="p-3 md:p-6">
                   <div className="aspect-square mb-3 md:mb-4 overflow-hidden rounded-full w-[120px] md:w-[160px] mx-auto relative">
-                    <Image
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
                       src={member.image}
                       alt={member.name}
                       width={160}
                       height={160}
                       className="w-full h-full object-cover"
-                      unoptimized
                       onError={(e) => {
                         const target = e.target as HTMLImageElement;
-                        if (!target.src.includes('default.png')) {
+                        if (!target.src.includes("default.png")) {
                           target.src = "/events/default.png";
                         }
                       }}

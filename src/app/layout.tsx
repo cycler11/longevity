@@ -10,11 +10,13 @@ import { Toaster } from "sonner";
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
+  display: "optional",
 });
 
 const fontMono = FontMono({
   subsets: ["latin"],
   variable: "--font-mono",
+  display: "optional",
 });
 
 export const metadata: Metadata = {
@@ -120,7 +122,9 @@ export default function RootLayout({
       </head>
       <body className={`${fontSans.variable} ${fontMono.variable} font-sans antialiased`}>
         <NavBarDemo />
-        {children}
+        <div className="min-h-screen flex flex-col pt-0 pb-20 sm:pt-16 sm:pb-0">
+          {children}
+        </div>
         <Footer />
         <Toaster />
       </body>

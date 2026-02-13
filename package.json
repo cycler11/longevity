@@ -3,9 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --hostname 127.0.0.1 -p 3000",
+    "dev:3001": "next dev -p 3001 --hostname 127.0.0.1",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -H 127.0.0.1 -p 3000",
+    "serve": "npm run build && npm run start",
     "lint": "next lint"
   },
   "dependencies": {

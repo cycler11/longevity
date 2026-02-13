@@ -1,2 +1,7 @@
 node_modules
-public/events/IMG_6516.png
+.next
+.env*.local
+.DS_Store
+*.log
+dist
+build
